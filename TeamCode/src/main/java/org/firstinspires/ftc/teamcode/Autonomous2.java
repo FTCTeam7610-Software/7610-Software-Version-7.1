@@ -21,15 +21,15 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@Autonomous(name="AutonomousRedLeft")
-public class Autonomous1 extends LinearOpMode {
+@Autonomous(name="AutonomousRedRight")
+public class Autonomous2 extends LinearOpMode{
 
     //hardware components
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
     private DcMotor armMotor = null;
-    private CRServo carouselMotor = null;
-    private Gyro gyro = null;
+    private CRServo carouselMotor=null;
+    private Gyro gyro=null;
     private BNO055IMU imu;
 
     //subject to change after rigorous testing
@@ -38,9 +38,9 @@ public class Autonomous1 extends LinearOpMode {
     final int MIDDLE_ARM_POSITION = -800;
     final int BOTTOM_ARM_POSITION = -300;
     final int MIN_ARM_POSITION = 0;
-    final double tpd = (MIN_ARM_POSITION - MAX_ARM_POSITION) / 120.0;
+    final double tpd = (MIN_ARM_POSITION-MAX_ARM_POSITION)/120.0;
     double power = 0.25;
-    final double armPower = 0.35;
+    final double armPower=0.35;
 
     private Servo clawServo = null;
     // Carousel servo
@@ -51,19 +51,20 @@ public class Autonomous1 extends LinearOpMode {
     boolean armButtonPressed;
 
 
+
     //states
-    boolean forward = false;
-    boolean right = false;
-    boolean ArmUp = false;
+    boolean forward=false;
+    boolean right=false;
+    boolean ArmUp=false;
 
     //helper variables
-    List<Double> leftencodervalues = new ArrayList<Double>();
-    List<Double> rightencodervalues = new ArrayList<Double>();
-    List<Double> armencodervalues = new ArrayList<Double>();
-    List<Double> Gyrovalues = new ArrayList<Double>();
-    List<Double> servotimevalues = new ArrayList<Double>();
+    List<Double> leftencodervalues=new ArrayList<Double>();
+    List<Double> rightencodervalues=new ArrayList<Double>();
+    List<Double> armencodervalues=new ArrayList<Double>();
+    List<Double> Gyrovalues=new ArrayList<Double>();
+    List<Double> servotimevalues=new ArrayList<Double>();
     double rotcount = 0;
-    boolean angleneg = false;
+    boolean angleneg=false;
 
     OpenCvCamera cam;
     int locationDuck = 2;
@@ -71,16 +72,16 @@ public class Autonomous1 extends LinearOpMode {
     @Override
     public void runOpMode() {
         //hardware initialization
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters params = new BNO055IMU.Parameters();
+        imu=hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters params= new BNO055IMU.Parameters();
         params.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         imu.initialize(params);
-        leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
-        carouselMotor = hardwareMap.get(CRServo.class, "c_servo");
+        carouselMotor=hardwareMap.get(CRServo.class,"c_servo");
         clawServo = hardwareMap.get(Servo.class, "claw_servo");
-        gyro = new Gyro(hardwareMap, AngleUnit.DEGREES);
+        gyro=new Gyro(hardwareMap, AngleUnit.DEGREES);
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -106,10 +107,9 @@ public class Autonomous1 extends LinearOpMode {
         // setting up the camera device and streaming system
         cam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened() {
-                cam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened(){
+                cam.startStreaming(320,240,OpenCvCameraRotation.UPRIGHT);
             }
-
             @Override
             public void onError(int errorCode) {
                 //please die
@@ -131,12 +131,13 @@ public class Autonomous1 extends LinearOpMode {
             //this code moves robot from starting to in front of the shipping hub and drops freight on the middle level
             clawServo.setPosition(0);
             sleep(1500);
-            if (locationDuck == 1) { // left location - bottom level
-                if (true) {
+
+            if (locationDuck == 1){ // left location - bottom level
+                if (true){
                     armMotor.setTargetPosition(BOTTOM_ARM_POSITION);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                    while (armMotor.getCurrentPosition() > BOTTOM_ARM_POSITION) {
+                    while (armMotor.getCurrentPosition() > BOTTOM_ARM_POSITION){
                         armMotor.setPower(-armPower);
                         telemetry.addData("Encoder: ", armMotor.getCurrentPosition());
                         telemetry.update();
@@ -144,12 +145,12 @@ public class Autonomous1 extends LinearOpMode {
                     }
                     armMotor.setPower(PID);
                 }
-            } else if (locationDuck == 2) { // right spot - top level
-                if (true) {
+            } else if (locationDuck == 2){ // right spot - top level
+                if (true){
                     armMotor.setTargetPosition(MAX_ARM_POSITION);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                    while (armMotor.getCurrentPosition() > MAX_ARM_POSITION) {
+                    while (armMotor.getCurrentPosition() > MAX_ARM_POSITION){
                         armMotor.setPower(-armPower);
                         telemetry.addData("Encoder: ", armMotor.getCurrentPosition());
                         telemetry.update();
@@ -157,12 +158,12 @@ public class Autonomous1 extends LinearOpMode {
                     }
                     armMotor.setPower(PID);
                 }
-            } else if (locationDuck == 3) { // middle spot - middle level
-                if (true) {
+            } else if (locationDuck == 3){ // middle spot - middle level
+                if (true){
                     armMotor.setTargetPosition(MIDDLE_ARM_POSITION);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                    while (armMotor.getCurrentPosition() > MIDDLE_ARM_POSITION) {
+                    while (armMotor.getCurrentPosition() > MIDDLE_ARM_POSITION){
                         armMotor.setPower(-armPower);
                         telemetry.addData("Encoder: ", armMotor.getCurrentPosition());
                         telemetry.update();
@@ -175,20 +176,20 @@ public class Autonomous1 extends LinearOpMode {
             forward(5);
             startSleep(500);
 
-            if (locationDuck == 1) { //bottom
-                turnRight(32);
+            if (locationDuck == 1){ //bottom
+                turnLeft(34);
                 startSleep(1000);
-                forward(30);
+                forward(28);
                 startSleep(1500);
-            } else if (locationDuck == 2) { //top
-                turnRight(32);
+            } else if (locationDuck == 2){ //top
+                turnLeft(34);
                 startSleep(1000);
-                forward(30);
+                forward(28);
                 startSleep(1500);
-            } else if (locationDuck == 3) { //middle
-                turnRight(32);
+            } else if (locationDuck == 3){ //middle
+                turnLeft(34);
                 startSleep(1000);
-                forward(30);
+                forward(28);
                 startSleep(1500);
             }
 
@@ -212,6 +213,7 @@ public class Autonomous1 extends LinearOpMode {
             if (true){
                 armMotor.setTargetPosition(MIN_ARM_POSITION);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
                 while (armMotor.getCurrentPosition()<=MIN_ARM_POSITION){
                     armMotor.setPower(armPower);
                     telemetry.addData("Encoder: ", armMotor.getCurrentPosition());
@@ -220,60 +222,40 @@ public class Autonomous1 extends LinearOpMode {
                 }
                 armMotor.setPower(PID);
             }
+
              */
 
             leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
             rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-            if (locationDuck == 1) { //bottom
-                turnRight(22);
-                startSleep(800);
-                backward(46);
+            if (locationDuck == 1){ //bottom
+                turnRight(34);
+                startSleep(1000);
+                backward(30);
                 startSleep(2000);
-                carouselMotor.setPower(0.5);
-                leftDrive.setPower(-0.01);
-                rightDrive.setPower(-0.01);
-                sleep(500);
-                leftDrive.setPower(0);
-                rightDrive.setPower(0);
-                sleep(2500);
-                carouselMotor.setPower(0);
-            } else if (locationDuck == 2) { //top
-                turnRight(22);
-                startSleep(800);
-                backward(46);
+                turnRight(90);
+                startSleep(1000);
+                forward(50);
+                startSleep(3000);
+            } else if (locationDuck == 2){ //top
+                turnRight(34);
+                startSleep(1000);
+                backward(30);
                 startSleep(2000);
-                carouselMotor.setPower(0.5);
-                leftDrive.setPower(-0.01);
-                rightDrive.setPower(-0.01);
-                sleep(500);
-                leftDrive.setPower(0);
-                rightDrive.setPower(0);
-                sleep(2500);
-                carouselMotor.setPower(0);
-            } else if (locationDuck == 3) { //middle
-                turnRight(22);
-                startSleep(800);
-                backward(46);
+                turnRight(90);
+                startSleep(1000);
+                forward(50);
+                startSleep(3000);
+            } else if (locationDuck == 3){ //middle
+                turnRight(34);
+                startSleep(1000);
+                backward(30);
                 startSleep(2000);
-                carouselMotor.setPower(0.5);
-                leftDrive.setPower(-0.01);
-                rightDrive.setPower(-0.01);
-                sleep(500);
-                leftDrive.setPower(0);
-                rightDrive.setPower(0);
-                sleep(2500);
-                carouselMotor.setPower(0);
+                turnRight(90);
+                startSleep(1000);
+                forward(50);
+                startSleep(3000);
             }
-
-            leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            forward(6);
-            startSleep(1000);
-            turnLeft(85);
-            startSleep(2000);
-            forward(24);
-            startSleep(3000);
 
 
             telemetry.addLine("Scanning");
@@ -285,77 +267,74 @@ public class Autonomous1 extends LinearOpMode {
             break;
         }
     }
-
     //spins servo 7 seconds per duck (hardcoded in)
-    public void spinCarousel(int numducks) {
+    public void spinCarousel(int numducks){
         carouselMotor.setPower(0.5);
-        double time = getRuntime();
-        servotimevalues.add(time + 7000 * numducks);
+        double time=getRuntime();
+        servotimevalues.add(time+7000*numducks);
     }
-
     //Helps calculate continous angle value (- infinity to + infinity by checking when the angle switches signs
-    public void checkJump() {
-        if (right) {
-            if (angleneg) {
-                if (gyro.getAngle() >= 0) {
-                    rotcount -= 1;
-                    angleneg = false;
+    public void checkJump(){
+        if(right){
+            if(angleneg){
+                if(gyro.getAngle()>=0){
+                    rotcount-=1;
+                    angleneg=false;
                 }
             }
-            if (gyro.getAngle() < 0) {
+            if(gyro.getAngle()<0){
 
 
-                angleneg = true;
+                angleneg=true;
             }
-        } else {
-            if (!angleneg) {
-                if (gyro.getAngle() < 0) {
-                    rotcount += 1;
-                    angleneg = true;
+        }else{
+            if(!angleneg){
+                if(gyro.getAngle()<0){
+                    rotcount+=1;
+                    angleneg=true;
                 }
             }
-            if (gyro.getAngle() > 0) {
+            if(gyro.getAngle()>0){
 
 
-                angleneg = false;
+                angleneg=false;
             }
         }
     }
-
     //Method that helps asynchronous movement and motor access by checking all the motors and seeing wether they should be ended or not
-    public void endMotors() {
-        if (servotimevalues.size() > 0) {
-            if (servotimevalues.get(0) >= getRuntime()) {
+    public void endMotors(){
+        if(servotimevalues.size()>0){
+            if(servotimevalues.get(0)>=getRuntime()){
                 carouselMotor.setPower(0);
                 servotimevalues.remove(0);
             }
         }
-        if (forward) {
-            if (leftencodervalues.size() > 0) {
-                if (leftDrive.getCurrentPosition() >= leftencodervalues.get(0)) {
+        if(forward){
+            if(leftencodervalues.size()>0){
+                if(leftDrive.getCurrentPosition()>=leftencodervalues.get(0)){
                     leftencodervalues.remove(0);
                     leftDrive.setPower(0);
 
                 }
             }
-            if (rightencodervalues.size() > 0) {
-                if (rightDrive.getCurrentPosition() >= rightencodervalues.get(0)) {
+            if(rightencodervalues.size()>0){
+                if(rightDrive.getCurrentPosition()>=rightencodervalues.get(0)){
                     rightencodervalues.remove(0);
                     rightDrive.setPower(0);
                 }
             }
 
 
-        } else {
-            if (leftencodervalues.size() > 0) {
-                if (leftDrive.getCurrentPosition() <= leftencodervalues.get(0)) {
+        }else{
+            if(leftencodervalues.size()>0){
+                if(leftDrive.getCurrentPosition()<=leftencodervalues.get(0)){
                     leftencodervalues.remove(0);
                     leftDrive.setPower(0);
 
                 }
             }
-            if (rightencodervalues.size() > 0) {
-                if (rightDrive.getCurrentPosition() <= rightencodervalues.get(0)) {
+            if(rightencodervalues.size()>0){
+                if(rightDrive.getCurrentPosition()<=rightencodervalues.get(0)){
                     rightencodervalues.remove(0);
                     rightDrive.setPower(0);
                 }
@@ -363,37 +342,37 @@ public class Autonomous1 extends LinearOpMode {
 
 
         }
-        if (right) {
-            if (Gyrovalues.size() > 0) {
-                if (getRealAngle() <= Gyrovalues.get(0)) {
+        if(right){
+            if(Gyrovalues.size()>0){
+                if(getRealAngle()<=Gyrovalues.get(0)){
                     Gyrovalues.remove(0);
                     rightDrive.setPower(0);
                     leftDrive.setPower(0);
-                } else {
+                }else{
                     leftDrive.setPower(power);
                     rightDrive.setPower(-power);
                 }
             }
-        } else {
-            if (Gyrovalues.size() > 0) {
-                if (getRealAngle() >= Gyrovalues.get(0)) {
+        }else{
+            if(Gyrovalues.size()>0){
+                if(getRealAngle()>=Gyrovalues.get(0)){
                     Gyrovalues.remove(0);
                     rightDrive.setPower(0);
                     leftDrive.setPower(0);
-                } else {
+                }else{
                     leftDrive.setPower(-power);
                     rightDrive.setPower(power);
                 }
             }
         }
-        if (ArmUp) {
-            if (armencodervalues.size() > 0) {
-                if (armMotor.getCurrentPosition() <= armencodervalues.get(0)) {
+        if(ArmUp){
+            if(armencodervalues.size()>0){
+                if(armMotor.getCurrentPosition()<=armencodervalues.get(0)){
                     armMotor.setPower(0);
                     armencodervalues.remove(0);
                 }
             }
-        } else {
+        }else {
             if (armencodervalues.size() > 0) {
                 if (armMotor.getCurrentPosition() >= armencodervalues.get(0)) {
                     armMotor.setPower(0);
@@ -402,101 +381,95 @@ public class Autonomous1 extends LinearOpMode {
             }
         }
     }
-
     //moves arm up given a positive parameter in degrees
-    public void movingArmUp(int degrees) {
+    public void movingArmUp(int degrees){
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ArmUp = true;
-        if (armMotor.getCurrentPosition() - degrees * tpd < MAX_ARM_POSITION) {
-            armencodervalues.add((double) MAX_ARM_POSITION);
-        } else {
-            armencodervalues.add(armMotor.getCurrentPosition() - degrees * tpd);
+        ArmUp=true;
+        if(armMotor.getCurrentPosition()-degrees*tpd<MAX_ARM_POSITION){
+            armencodervalues.add((double)MAX_ARM_POSITION);
+        }
+        else{
+            armencodervalues.add(armMotor.getCurrentPosition()-degrees*tpd);
         }
         armMotor.setPower(-armPower);
     }
-
     //moves arm down given a positive parameter in degrees
-    public void movingArmDown(int degrees) {
+    public void movingArmDown(int degrees){
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ArmUp = false;
-        if (armMotor.getCurrentPosition() + degrees * tpd > MIN_ARM_POSITION) {
-            armencodervalues.add((double) MIN_ARM_POSITION);
-        } else {
-            armencodervalues.add(armMotor.getCurrentPosition() + degrees * tpd);
+        ArmUp=false;
+        if(armMotor.getCurrentPosition()+degrees*tpd>MIN_ARM_POSITION){
+            armencodervalues.add((double)MIN_ARM_POSITION);
+        }
+        else{
+            armencodervalues.add(armMotor.getCurrentPosition()+degrees*tpd);
         }
         armMotor.setPower(armPower);
     }
-
     //moves robot forward given a positive parameter in inches
     //temporarily ticks
-    public void forward(double inches) {
-        forward = true;
-        double distanceInTicks = inches * tpi;
+    public void forward(double inches){
+        forward=true;
+        double distanceInTicks = inches*tpi;
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftencodervalues.add(leftDrive.getCurrentPosition() + distanceInTicks);
-        rightencodervalues.add(rightDrive.getCurrentPosition() + distanceInTicks);
+        leftencodervalues.add(leftDrive.getCurrentPosition()+distanceInTicks);
+        rightencodervalues.add(rightDrive.getCurrentPosition()+distanceInTicks);
         leftDrive.setPower(power);
         rightDrive.setPower(power);
     }
-
     //moves robot backward given a positive parameter in inches
-    public void backward(double inches) {
-        forward = false;
+    public void backward(double inches){
+        forward=false;
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        double distanceInTicks = inches * tpi;
-        leftencodervalues.add(leftDrive.getCurrentPosition() - distanceInTicks);
-        rightencodervalues.add(rightDrive.getCurrentPosition() - distanceInTicks);
+        double distanceInTicks = inches*tpi;
+        leftencodervalues.add(leftDrive.getCurrentPosition()-distanceInTicks);
+        rightencodervalues.add(rightDrive.getCurrentPosition()-distanceInTicks);
         leftDrive.setPower(-power);
         rightDrive.setPower(-power);
     }
-
     //turns robot left given a positive parameter in degrees
-    public void turnLeft(double degrees) {
-        right = false;
+    public void turnLeft(double degrees){
+        right=false;
         //temporary fix for angle overshooting
-        if (degrees > 60) {
-            Gyrovalues.add(getRealAngle() + degrees - 30);
-        } else {
-            Gyrovalues.add(getRealAngle() + degrees / 2.0);
+        if(degrees>60){
+            Gyrovalues.add(getRealAngle()+degrees-30);
+        }else{
+            Gyrovalues.add(getRealAngle()+degrees/2.0);
         }
 
         leftDrive.setPower(-power);
         rightDrive.setPower(power);
     }
-
     //turns robot right given a positive parameter in degrees
-    public void turnRight(double degrees) {
-        right = true;
-        if (degrees > 60) {
-            Gyrovalues.add(getRealAngle() - degrees + 30);
-        } else {
-            Gyrovalues.add(getRealAngle() - degrees / 2.0);
+    public void turnRight(double degrees){
+        right=true;
+        if(degrees>60){
+            Gyrovalues.add(getRealAngle()-degrees+30);
+        }else{
+            Gyrovalues.add(getRealAngle()-degrees/2.0);
         }
         leftDrive.setPower(power);
         rightDrive.setPower(-power);
     }
-
     //modified version of sleep function that during sleep also updates motor ending and calls endmotors
-    public void startSleep(int ms) {
-        int time = 0;
-        while (time <= ms) {
+    public void startSleep(int ms){
+        int time=0;
+        while(time<=ms){
             endMotors();
             getRealAngle();
             sleep(20);
-            time += 20;
+            time+=20;
         }
     }
-
     //method that calculates - infinity to + infinity degree measurement of the robot
-    public double getRealAngle() {
+    public double getRealAngle(){
         checkJump();
-        return 360 * rotcount + gyro.getAngle();
+        return 360*rotcount+gyro.getAngle();
     }
 
     // OPEN CV CLASS
@@ -511,18 +484,17 @@ public class Autonomous1 extends LinearOpMode {
         int height = 240;
 
         // (0, 0) is top left of the entire camera view
-        Rect LEFT_ROI = new Rect(new Point(0, 0), new Point(width / 3, height));
-        Rect MIDDLE_ROI = new Rect(new Point(width / 3, 0), new Point(2 * width / 3, height));
-        Rect RIGHT_ROI = new Rect(new Point(2 * width / 3, 0), new Point(width, height));
+        Rect LEFT_ROI = new Rect(new Point(0, 0), new Point(width/3, height));
+        Rect MIDDLE_ROI = new Rect(new Point(width/3, 0), new Point(2*width/3, height));
+        Rect RIGHT_ROI = new Rect(new Point(2*width/3, 0), new Point(width, height));
 
         // Constructor
-        public DuckScanner(Telemetry t) {
+        public DuckScanner(Telemetry t){
             tel = t;
         }
-
         // Process each frame
         @Override
-        public Mat processFrame(Mat m) {
+        public Mat processFrame(Mat m){
             // m is the RGB matrix that the camera sees
             // Converting matrix from RGB --> HSV
             // HSV: Hue - color, Saturation - intensity, value - brightness
@@ -575,10 +547,10 @@ public class Autonomous1 extends LinearOpMode {
             if (left_white_percent > middle_white_percent && left_white_percent > right_white_percent) {
                 telemetry.addData("Duck location", "left");
                 locationDuck = 1;
-            } else if (right_white_percent > middle_white_percent && right_white_percent > left_white_percent) {
+            } else if (right_white_percent > middle_white_percent && right_white_percent > left_white_percent){
                 telemetry.addData("Duck location", "right");
                 locationDuck = 2;
-            } else if (middle_white_percent > right_white_percent && middle_white_percent > left_white_percent) {
+            } else if (middle_white_percent > right_white_percent && middle_white_percent > left_white_percent){
                 telemetry.addData("Duck location", "middle");
                 locationDuck = 3;
             } else {
@@ -672,12 +644,15 @@ public class Autonomous1 extends LinearOpMode {
 //        }
 //    }
 
-    double pid() {
+    double pid(){
         if (armMotor.getCurrentPosition() > 800) return 0.15;
         else if (armMotor.getCurrentPosition() > 500) return 0.1;
         else if (armMotor.getCurrentPosition() > 200) return 0.05;
         else return 0;
     }
+
+
+
 
 
 }
