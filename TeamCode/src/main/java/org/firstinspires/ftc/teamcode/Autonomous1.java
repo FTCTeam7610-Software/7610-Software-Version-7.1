@@ -24,7 +24,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
-import CupertinoRobotics.support.Hardware.Gyro;
+//import CupertinoRobotics.support.Hardware.Gyro;
 
 @Autonomous(name="Autonomous")
 public class Autonomous1 extends LinearOpMode{
@@ -34,7 +34,7 @@ public class Autonomous1 extends LinearOpMode{
     private DcMotor rightDrive = null;
     private DcMotor armMotor = null;
     private CRServo carouselMotor=null;
-    private Gyro gyro=null;
+    //private Gyro gyro=null;
     private BNO055IMU imu;
 
     //subject to change after rigorous testing
@@ -86,7 +86,7 @@ public class Autonomous1 extends LinearOpMode{
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
         carouselMotor=hardwareMap.get(CRServo.class,"c_servo");
         clawServo = hardwareMap.get(Servo.class, "claw_servo");
-        gyro=new Gyro(hardwareMap, AngleUnit.DEGREES);
+        //gyro=new Gyro(hardwareMap, AngleUnit.DEGREES);
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -311,6 +311,7 @@ public class Autonomous1 extends LinearOpMode{
         double time=getRuntime();
         servotimevalues.add(time+7000*numducks);
     }
+    /*
     //Helps calculate continous angle value (- infinity to + infinity by checking when the angle switches signs
     public void checkJump(){
         if(right){
@@ -339,6 +340,8 @@ public class Autonomous1 extends LinearOpMode{
             }
         }
     }
+
+     */
     //Method that helps asynchronous movement and motor access by checking all the motors and seeing wether they should be ended or not
     public void endMotors(){
         if(servotimevalues.size()>0){
@@ -504,10 +507,12 @@ public class Autonomous1 extends LinearOpMode{
             time+=20;
         }
     }
+
+
     //method that calculates - infinity to + infinity degree measurement of the robot
     public double getRealAngle(){
-        checkJump();
-        return 360*rotcount+gyro.getAngle();
+        //checkJump();
+        return 360*rotcount+0; //gyro.getAngle();
     }
 
     // OPEN CV CLASS
