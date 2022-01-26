@@ -16,7 +16,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@Autonomous(name = "DuckScanner", group = "Auto")
+//@Autonomous(name = "DuckScanner", group = "Auto")
 //@Disabled
 public class DuckScanner extends OpenCvPipeline {
     Telemetry tel;

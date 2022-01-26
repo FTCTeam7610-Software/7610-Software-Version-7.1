@@ -56,7 +56,7 @@ public class DuckTesterOpenCV extends LinearOpMode {
             telemetry.addLine("Scanning");
             telemetry.update();
 
-            scanner.processFrame(new Mat(cameraMonitorViewId));
+            //scanner.processFrame(new Mat(cameraMonitorViewId));
 
             telemetry.addData("Duck location", scanner.duckLocation());
 

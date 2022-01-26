@@ -66,7 +66,7 @@ public class Autonomous1 extends LinearOpMode {
     boolean angleneg = false;
 
     OpenCvCamera cam;
-    int locationDuck = 2;
+    int locationDuck = 0;
 
     @Override
     public void runOpMode() {
@@ -123,9 +123,9 @@ public class Autonomous1 extends LinearOpMode {
             telemetry.update();
             // duck location is the variable that says where the duck was
             // use that to determine where to place our shipping element
-            //scanner.processFrame(new Mat(cameraMonitorViewId));
 
-            telemetry.addData("Duck Location", locationDuck);
+            telemetry.addData("Duck Location", scanner.duckLocation());
+            locationDuck = scanner.duckLocation();
             telemetry.update();
 
             //this code moves robot from starting to in front of the shipping hub and drops freight on the middle level
@@ -500,7 +500,7 @@ public class Autonomous1 extends LinearOpMode {
     }
 
     // OPEN CV CLASS
-
+/*
     public class DuckScanner extends OpenCvPipeline {
         Telemetry tel;
         Mat mat = new Mat();
@@ -541,17 +541,17 @@ public class Autonomous1 extends LinearOpMode {
             // Parameters: source matrix, lower bound, higher bound, destination matrix
             // After this, regions with HSV will be white, bg black
             Core.inRange(mat, lowHSV, highHSV, mat);
-            /*
+
             Set up the threshold/rectangles for regions of the camera view
             The region with the most white percentage will be selected
-             */
+
             Mat left_mat = mat.submat(LEFT_ROI);
             Mat middle_mat = mat.submat(MIDDLE_ROI);
             Mat right_mat = mat.submat(RIGHT_ROI);
 
             double left_white_percent = Core.sumElems(left_mat).val[0] / LEFT_ROI.area() / 255;
             double middle_white_percent = Core.sumElems(middle_mat).val[0] / LEFT_ROI.area() / 255;
-            double right_white_percent = Core.sumElems(right_mat).val[0] / RIGHT_ROI.area() / 255;
+
 
 
 //            double left_white_percent = Core.mean(left_mat).val[0] / 255;
@@ -593,6 +593,8 @@ public class Autonomous1 extends LinearOpMode {
 
     }
 
+
+ */
     // ARM CODE
 
 //    class ArmClawStateMachine {
