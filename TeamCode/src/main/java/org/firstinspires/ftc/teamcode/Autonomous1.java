@@ -274,7 +274,7 @@ public class Autonomous1 extends LinearOpMode {
 
             leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            forward(6);
+            forward(25);
             startSleep(1000);
             turnLeft(85);
             startSleep(2000);
