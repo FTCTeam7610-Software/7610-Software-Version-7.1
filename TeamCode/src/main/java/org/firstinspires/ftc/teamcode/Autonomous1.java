@@ -40,7 +40,7 @@ public class Autonomous1 extends LinearOpMode {
     final int MIN_ARM_POSITION = 0;
     final double tpd = (MIN_ARM_POSITION - MAX_ARM_POSITION) / 120.0;
     double power = 0.25;
-    final double armPower = 0.35;
+    final double armPower = 0.45;
 
     private Servo clawServo = null;
     // Carousel servo
@@ -150,7 +150,7 @@ public class Autonomous1 extends LinearOpMode {
                     }
                     armMotor.setPower(PID);
                 }
-            } else if (locationDuck == 2) { // right spot - top level
+            } else if (locationDuck == 3) { // right spot - top level
                 if (true) {
                     armMotor.setTargetPosition(MAX_ARM_POSITION);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -163,7 +163,7 @@ public class Autonomous1 extends LinearOpMode {
                     }
                     armMotor.setPower(PID);
                 }
-            } else if (locationDuck == 3) { // middle spot - middle level
+            } else if (locationDuck == 2) { // middle spot - middle level
                 if (true) {
                     armMotor.setTargetPosition(MIDDLE_ARM_POSITION);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -183,17 +183,17 @@ public class Autonomous1 extends LinearOpMode {
 
             if (locationDuck == 1) { //bottom
                 turnRight(32);
-                startSleep(1000);
+                startSleep(500);
+                forward(28);
+                startSleep(1500);
+            } else if (locationDuck == 3) { //top
+                turnRight(32);
+                startSleep(500);
                 forward(30);
                 startSleep(1500);
-            } else if (locationDuck == 2) { //top
+            } else if (locationDuck == 2) { //middle
                 turnRight(32);
-                startSleep(1000);
-                forward(30);
-                startSleep(1500);
-            } else if (locationDuck == 3) { //middle
-                turnRight(32);
-                startSleep(1000);
+                startSleep(500);
                 forward(30);
                 startSleep(1500);
             }
@@ -234,7 +234,7 @@ public class Autonomous1 extends LinearOpMode {
             if (locationDuck == 1) { //bottom
                 turnRight(22);
                 startSleep(800);
-                backward(46);
+                backward(42);
                 startSleep(2000);
                 carouselMotor.setPower(0.5);
                 leftDrive.setPower(-0.01);
@@ -244,10 +244,10 @@ public class Autonomous1 extends LinearOpMode {
                 rightDrive.setPower(0);
                 sleep(2500);
                 carouselMotor.setPower(0);
-            } else if (locationDuck == 2) { //top
+            } else if (locationDuck == 3) { //top
                 turnRight(22);
                 startSleep(800);
-                backward(46);
+                backward(42);
                 startSleep(2000);
                 carouselMotor.setPower(0.5);
                 leftDrive.setPower(-0.01);
@@ -257,10 +257,10 @@ public class Autonomous1 extends LinearOpMode {
                 rightDrive.setPower(0);
                 sleep(2500);
                 carouselMotor.setPower(0);
-            } else if (locationDuck == 3) { //middle
+            } else if (locationDuck == 2) { //middle
                 turnRight(22);
                 startSleep(800);
-                backward(46);
+                backward(42);
                 startSleep(2000);
                 carouselMotor.setPower(0.5);
                 leftDrive.setPower(-0.01);
@@ -274,17 +274,8 @@ public class Autonomous1 extends LinearOpMode {
 
             leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            forward(6);
-            startSleep(1000);
-            turnLeft(85);
-            startSleep(2000);
-            forward(24);
+            forward(20);
             startSleep(3000);
-
-
-            telemetry.addLine("Scanning");
-            telemetry.update();
-
 
             sleep(500);
 
