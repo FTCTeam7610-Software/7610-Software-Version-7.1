@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Orig-7610-Software-Version-7.1.iml" filepath="$PROJECT_DIR$/.idea/modules/Orig-7610-Software-Version-7.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FtcRobotController/Orig-7610-Software-Version-7.1.FtcRobotController.iml" filepath="$PROJECT_DIR$/.idea/modules/FtcRobotController/Orig-7610-Software-Version-7.1.FtcRobotController.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TeamCode/Orig-7610-Software-Version-7.1.TeamCode.iml" filepath="$PROJECT_DIR$/.idea/modules/TeamCode/Orig-7610-Software-Version-7.1.TeamCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/7610-Software-Version-7.1.iml" filepath="$PROJECT_DIR$/.idea/modules/7610-Software-Version-7.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FtcRobotController/7610-Software-Version-7.1.FtcRobotController.iml" filepath="$PROJECT_DIR$/.idea/modules/FtcRobotController/7610-Software-Version-7.1.FtcRobotController.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TeamCode/7610-Software-Version-7.1.TeamCode.iml" filepath="$PROJECT_DIR$/.idea/modules/TeamCode/7610-Software-Version-7.1.TeamCode.iml" />
     </modules>
   </component>
 </project>
