@@ -28,9 +28,9 @@ public class DuckScanner extends OpenCvPipeline {
     int height = 240;
 
     // (0, 0) is top left of the entire camera view
-    Rect LEFT_ROI = new Rect(new Point(0, 0), new Point(width / 3, height));
-    Rect MIDDLE_ROI = new Rect(new Point(width / 3, 0), new Point(2 * width / 3, height));
-    Rect RIGHT_ROI = new Rect(new Point(2 * width / 3, 0), new Point(width, height));
+    Rect LEFT_ROI = new Rect(new Point(0, 0), new Point(width / 3, height/4));
+    Rect MIDDLE_ROI = new Rect(new Point(width / 3, 0), new Point(2 * width / 3, height/4));
+    Rect RIGHT_ROI = new Rect(new Point(2 * width / 3, 0), new Point(width, height/4));
 
     // Constructor
     public DuckScanner(Telemetry t) {
