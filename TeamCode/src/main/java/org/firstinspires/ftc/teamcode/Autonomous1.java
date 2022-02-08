@@ -40,7 +40,7 @@ public class Autonomous1 extends LinearOpMode {
     final int MIN_ARM_POSITION = 0;
     final double tpd = (MIN_ARM_POSITION - MAX_ARM_POSITION) / 120.0;
     double power = 0.25;
-    final double armPower = 0.45;
+    final double armPower = 0.15;
 
     private Servo clawServo = null;
     // Carousel servo
