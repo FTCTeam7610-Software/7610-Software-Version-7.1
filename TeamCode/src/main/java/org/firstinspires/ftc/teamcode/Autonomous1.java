@@ -140,7 +140,7 @@ public class Autonomous1 extends LinearOpMode {
             if (locationDuck == 1) { // left location - bottom level
                 if (true) {
                     armMotor.setTargetPosition(BOTTOM_ARM_POSITION);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    //armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                     while (armMotor.getCurrentPosition() > BOTTOM_ARM_POSITION) {
                         armMotor.setPower(-armPower);
@@ -153,7 +153,7 @@ public class Autonomous1 extends LinearOpMode {
             } else if (locationDuck == 3) { // right spot - top level
                 if (true) {
                     armMotor.setTargetPosition(MAX_ARM_POSITION);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    //armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                     while (armMotor.getCurrentPosition() > MAX_ARM_POSITION) {
                         armMotor.setPower(-armPower);
@@ -166,7 +166,7 @@ public class Autonomous1 extends LinearOpMode {
             } else if (locationDuck == 2) { // middle spot - middle level
                 if (true) {
                     armMotor.setTargetPosition(MIDDLE_ARM_POSITION);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    //armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                     while (armMotor.getCurrentPosition() > MIDDLE_ARM_POSITION) {
                         armMotor.setPower(-armPower);
