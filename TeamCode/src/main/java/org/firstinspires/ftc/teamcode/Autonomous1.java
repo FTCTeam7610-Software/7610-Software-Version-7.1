@@ -40,7 +40,7 @@ public class Autonomous1 extends LinearOpMode {
     final int MIN_ARM_POSITION = 0;
     final double tpd = (MIN_ARM_POSITION - MAX_ARM_POSITION) / 120.0;
     double power = 0.25;
-    final double armPower = 0.15;
+    final double armPower = 0.45;
 
     private Servo clawServo = null;
     // Carousel servo
@@ -139,7 +139,7 @@ public class Autonomous1 extends LinearOpMode {
             sleep(1500);
             if (locationDuck == 1) { // left location - bottom level
                 if (true) {
-                    armMotor.setTargetPosition(BOTTOM_ARM_POSITION);
+                    //armMotor.setTargetPosition(BOTTOM_ARM_POSITION);
                     //armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                     while (armMotor.getCurrentPosition() > BOTTOM_ARM_POSITION) {
@@ -152,7 +152,7 @@ public class Autonomous1 extends LinearOpMode {
                 }
             } else if (locationDuck == 3) { // right spot - top level
                 if (true) {
-                    armMotor.setTargetPosition(MAX_ARM_POSITION);
+                    //armMotor.setTargetPosition(MAX_ARM_POSITION);
                     //armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                     while (armMotor.getCurrentPosition() > MAX_ARM_POSITION) {
@@ -165,7 +165,7 @@ public class Autonomous1 extends LinearOpMode {
                 }
             } else if (locationDuck == 2) { // middle spot - middle level
                 if (true) {
-                    armMotor.setTargetPosition(MIDDLE_ARM_POSITION);
+                    //armMotor.setTargetPosition(MIDDLE_ARM_POSITION);
                     //armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                     while (armMotor.getCurrentPosition() > MIDDLE_ARM_POSITION) {
@@ -176,6 +176,16 @@ public class Autonomous1 extends LinearOpMode {
                     }
                     armMotor.setPower(PID);
                 }
+            }
+            if(locationDuck==1){
+                armMotor.setTargetPosition(BOTTOM_ARM_POSITION);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            }else if(locationDuck==3){
+                armMotor.setTargetPosition(MAX_ARM_POSITION);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            }else{
+                armMotor.setTargetPosition(MIDDLE_ARM_POSITION);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             }
 
             forward(5);
