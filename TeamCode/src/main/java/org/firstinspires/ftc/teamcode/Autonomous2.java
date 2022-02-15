@@ -229,7 +229,7 @@ public class Autonomous2 extends LinearOpMode {
             backward(22);
             startSleep(1000);
             turnRight(100);
-            startSleep(1000);
+            startSleep(2000);
             forward(50);
             startSleep(5000);
             /*
