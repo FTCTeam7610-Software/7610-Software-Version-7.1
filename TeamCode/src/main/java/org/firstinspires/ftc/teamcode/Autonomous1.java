@@ -287,6 +287,7 @@ public class Autonomous1 extends LinearOpMode {
             forward(3);
             startSleep(1000);
             turnLeft(85);
+            
             startSleep(1000);
             forward(26);
             startSleep(2000);

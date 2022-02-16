@@ -21,7 +21,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@Autonomous(name="AutonomousBlueLeft")
+@Autonomous(name="AutonomousRedRight")
 public class Autonomous4 extends LinearOpMode {
 
     //hardware components
@@ -228,10 +228,16 @@ public class Autonomous4 extends LinearOpMode {
             startSleep(1000);
             backward(22);
             startSleep(1000);
+            telemetry.addData("Turning","");
+            telemetry.update();
             turnLeft(100);
-            startSleep(1000);
-            forward(50);
-            startSleep(5000);
+            startSleep(2000);
+            leftDrive.setPower(power);
+            rightDrive.setPower(power);
+
+            sleep(5000);
+            leftDrive.setPower(0);
+            rightDrive.setPower(0);
             /*
             if (true){
                 armMotor.setTargetPosition(MIN_ARM_POSITION);
@@ -453,6 +459,11 @@ public class Autonomous4 extends LinearOpMode {
         while (time <= ms) {
             endMotors();
             getRealAngle();
+            telemetry.addData("left encoder", leftDrive.getCurrentPosition());
+            telemetry.addData("right encoder", rightDrive.getCurrentPosition());
+            telemetry.addData("left power", leftDrive.getPower());
+            telemetry.addData("right power", rightDrive.getPower());
+            telemetry.update();
             sleep(20);
             time += 20;
         }
