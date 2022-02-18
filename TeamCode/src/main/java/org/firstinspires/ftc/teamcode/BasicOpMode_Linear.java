@@ -139,7 +139,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double drive = -gamepad1.left_stick_y;
             double turn  =  gamepad1.right_stick_x;
             double power = Range.clip(drive, -0.6, 0.6);
-            turn *= 0.3;
+            turn *= 0.5;
             leftPower    = Range.clip(power + turn, -0.7, 0.7) ;
             rightPower   = Range.clip(power - turn, -0.7, 0.7);
 
@@ -292,4 +292,6 @@ public class BasicOpMode_Linear extends LinearOpMode {
         else if (armMotor.getCurrentPosition() > 200) return 0.13;
         else return 0.12;
     }
+
+
 }
