@@ -1,10 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\unsto\\Desktop\\Orig-7610-Software-Version-7.1\\TeamCode\\build\\intermediates\\res\\merged\\debug\\raw_readme.md.flat",
-        "source": "C:\\Users\\unsto\\Desktop\\Orig-7610-Software-Version-7.1\\TeamCode\\src\\main\\res\\raw\\readme.md"
+        "merged": "/Users/preethi/Documents/FTC_Robotics/7610-Software-Version-7.1/TeamCode/build/intermediates/res/merged/debug/raw_readme.md.flat",
+        "source": "/Users/preethi/Documents/FTC_Robotics/7610-Software-Version-7.1/TeamCode/src/main/res/raw/readme.md"
     },
     {
-        "merged": "C:\\Users\\unsto\\Desktop\\Orig-7610-Software-Version-7.1\\TeamCode\\build\\intermediates\\res\\merged\\debug\\xml_teamwebcamcalibrations.xml.flat",
-        "source": "C:\\Users\\unsto\\Desktop\\Orig-7610-Software-Version-7.1\\TeamCode\\src\\main\\res\\xml\\teamwebcamcalibrations.xml"
+        "merged": "/Users/preethi/Documents/FTC_Robotics/7610-Software-Version-7.1/TeamCode/build/intermediates/res/merged/debug/xml_teamwebcamcalibrations.xml.flat",
+        "source": "/Users/preethi/Documents/FTC_Robotics/7610-Software-Version-7.1/TeamCode/src/main/res/xml/teamwebcamcalibrations.xml"
     }
 ]

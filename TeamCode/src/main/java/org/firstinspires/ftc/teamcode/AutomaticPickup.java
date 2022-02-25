@@ -15,13 +15,14 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@TeleOp(name="Linear TeleOp - 1.0", group="Linear Opmode")
 public class AutomaticPickup extends OpenCvPipeline {
 
     Telemetry tel;
     Mat mat = new Mat();
 
-    String dir;
+    String dir = "null";
+    String leftamt;
+    String rightamt;
 
     int width = 320;
     int height = 240;
@@ -54,6 +55,9 @@ public class AutomaticPickup extends OpenCvPipeline {
             left_mat.release();
             right_mat.release();
 
+            leftamt = left_white_percent + "";
+            rightamt = right_white_percent + "";
+
             if (left_white_percent >= right_white_percent && left_white_percent > THRESHOLD){
                 dir = ("left and i = " + i);
                 break;
@@ -71,6 +75,14 @@ public class AutomaticPickup extends OpenCvPipeline {
 
     public String getDir(){
         return dir;
+    }
+
+    public String getLeftAmount(){
+        return leftamt;
+    }
+
+    public String getRightAmount(){
+        return rightamt;
     }
 
 }

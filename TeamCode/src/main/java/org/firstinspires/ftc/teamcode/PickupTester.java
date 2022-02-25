@@ -15,7 +15,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@TeleOp(name="Linear TeleOp - 1.0", group="Linear Opmode")
+@TeleOp(name="Pickup Tester", group="Linear Opmode")
 public class PickupTester extends LinearOpMode {
 
     OpenCvCamera cam;
@@ -62,6 +62,11 @@ public class PickupTester extends LinearOpMode {
 
             if (dir.substring(0, 1).equals("l")) telemetry.addLine("left");
             else if (dir.substring(0, 1).equals("r")) telemetry.addLine("right");
+
+            telemetry.addData("Left percent", pick.getLeftAmount());
+            telemetry.addData("Right percent", pick.getRightAmount());
+
+            telemetry.update();
 
             sleep(500);
         }

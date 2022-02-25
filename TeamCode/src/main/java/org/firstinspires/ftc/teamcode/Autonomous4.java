@@ -21,7 +21,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@Autonomous(name="AutonomousRedRight")
+@Autonomous(name="AutonomousBlueLeft")
 public class Autonomous4 extends LinearOpMode {
 
     //hardware components
@@ -259,7 +259,7 @@ public class Autonomous4 extends LinearOpMode {
 
     //spins servo 7 seconds per duck (hardcoded in)
     public void spinCarousel(int numducks) {
-        carouselMotor.setPower(0.5);
+        carouselMotor.setPower(-0.5);
         double time = getRuntime();
         servotimevalues.add(time + 7000 * numducks);
     }

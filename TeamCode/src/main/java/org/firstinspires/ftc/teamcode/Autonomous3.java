@@ -286,7 +286,7 @@ public class Autonomous3 extends LinearOpMode {
 
     //spins servo 7 seconds per duck (hardcoded in)
     public void spinCarousel(int numducks) {
-        carouselMotor.setPower(0.5);
+        carouselMotor.setPower(-0.5);
         double time = getRuntime();
         servotimevalues.add(time + 7000 * numducks);
     }
