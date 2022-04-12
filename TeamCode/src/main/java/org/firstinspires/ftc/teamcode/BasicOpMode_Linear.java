@@ -192,9 +192,12 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
             // CAROUSEL
 
-            boolean cButtonPressed = gamepad1.a;
-            if (cButtonPressed) {
+            boolean cButtonPressedL = gamepad1.a;
+            boolean cButtonPressedR = gamepad1.b;
+            if (cButtonPressedL) {
                 cServo.setPower(0.5);
+            } else if (cButtonPressedR) {
+                cServo.setPower(-0.5);
             } else {
                 cServo.setPower(0);
             }
